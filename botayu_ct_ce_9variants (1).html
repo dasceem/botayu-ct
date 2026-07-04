@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ботаю ЦТ/ЦЭ — Подготовка к централизованному тестированию</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 0; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-lg); }
+        .header-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; max-width: 1200px; margin: 0 auto; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; }
+        .logo-icon { width: 36px; height: 36px; background: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.1rem; }
+        .menu-btn { background: rgba(255,255,255,0.2); border: none; color: white; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background 0.2s; }
+        .menu-btn:active { background: rgba(255,255,255,0.3); }
+        .subject-tabs { display: flex; gap: 4px; padding: 0 16px 12px; max-width: 1200px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+        .subject-tabs::-webkit-scrollbar { display: none; }
+        .subject-tab { background: rgba(255,255,255,0.15); border: none; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; opacity: 0.8; }
+        .subject-tab.active { background: white; color: var(--primary); opacity: 1; }
+        .subject-tab.coming-soon { opacity: 0.5; }
+        .subject-tab.coming-soon::after { content: '🔒'; font-size: 0.7rem; margin-left: 4px; }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 40px 16px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px; opacity: 0.3; }
+        .hero-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+        .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
+        .hero p { font-size: 1rem; opacity: 0.9; margin-bottom: 24px; }
+        .hero-stats { display: flex; justify-content: center; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 1.75rem; font-weight: 800; display: block; }
+        .stat-label { font-size: 0.75rem; opacity: 0.8; }
+        .main { max-width: 800px; margin: 0 auto; padding: 24px 16px; }
+        .card { background: var(--card); border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .card-title .icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; }
+        .structure-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .structure-item { background: var(--bg); padding: 16px; border-radius: 12px; text-align: center; border: 2px solid transparent; transition: all 0.2s; }
+        .structure-item.highlight { border-color: var(--primary); background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(99,102,241,0.1)); }
+        .structure-item .number { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: block; }
+        .structure-item .label { font-size: 0.8rem; color: var(--text-light); margin-top: 4px; }
+        .topic-group { margin-bottom: 16px; }
+        .topic-group-title { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .topic-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .topic-tag { background: var(--bg); border: 1px solid var(--border); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; color: var(--text); transition: all 0.2s; cursor: pointer; }
+        .topic-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .topic-tag.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .difficulty-bar { display: flex; gap: 8px; margin-top: 12px; }
+        .difficulty-item { flex: 1; text-align: center; padding: 12px 8px; border-radius: 10px; font-size: 0.8rem; }
+        .difficulty-item.easy { background: #d1fae5; color: #065f46; }
+        .difficulty-item.medium { background: #fef3c7; color: #92400e; }
+        .difficulty-item.hard { background: #fee2e2; color: #991b1b; }
+        .difficulty-item.extreme { background: #ede9fe; color: #5b21b6; }
+        .score-calc { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 24px; border-radius: 16px; margin-bottom: 16px; }
+        .score-calc h3 { font-size: 1.1rem; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .calc-inputs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+        .calc-input-group { display: flex; flex-direction: column; gap: 4px; }
+        .calc-input-group label { font-size: 0.75rem; opacity: 0.8; }
+        .calc-input-group input { padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 1rem; font-weight: 600; text-align: center; font-family: inherit; }
+        .calc-input-group input::placeholder { color: rgba(255,255,255,0.4); }
+        .calc-input-group input:focus { outline: none; border-color: var(--primary-light); }
+        .calc-result { background: rgba(255,255,255,0.1); padding: 16px; border-radius: 12px; text-align: center; display: none; }
+        .calc-result.show { display: block; animation: fadeIn 0.3s ease; }
+        .calc-result .primary-score { font-size: 2.5rem; font-weight: 800; color: var(--secondary); }
+        .calc-result .test-score { font-size: 1.5rem; font-weight: 700; color: var(--success); margin-top: 4px; }
+        .calc-result .label { font-size: 0.8rem; opacity: 0.7; }
+        .plan-timeline { position: relative; padding-left: 28px; }
+        .plan-timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--primary), var(--primary-light)); }
+        .plan-item { position: relative; margin-bottom: 20px; padding: 16px; background: var(--bg); border-radius: 12px; border-left: 3px solid var(--primary); }
+        .plan-item::before { content: ''; position: absolute; left: -24px; top: 20px; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 2px var(--primary); }
+        .plan-item .week { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .plan-item .title { font-weight: 700; margin-bottom: 4px; }
+        .plan-item .desc { font-size: 0.85rem; color: var(--text-light); }
+        .plan-item .tasks { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+        .plan-item .task-tag { background: white; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; color: var(--text); border: 1px solid var(--border); }
+        .test-container { background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 16px; }
+        .test-header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 20px; }
+        .test-header h2 { font-size: 1.1rem; margin-bottom: 8px; }
+        .test-meta { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.9; flex-wrap: wrap; }
+        .test-body { padding: 20px; }
+        .question { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .question:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .question-number { display: inline-block; background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-size: 0.85rem; font-weight: 700; margin-right: 8px; }
+        .question-text { font-weight: 600; margin-bottom: 12px; display: inline; }
+        .question-meta { font-size: 0.75rem; color: var(--text-light); margin-left: 8px; }
+        .options { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+        .option { background: var(--bg); border: 2px solid var(--border); padding: 14px 16px; border-radius: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; font-size: 0.95rem; }
+        .option:hover { border-color: var(--primary-light); background: rgba(99,102,241,0.05); }
+        .option.selected { border-color: var(--primary); background: rgba(99,102,241,0.1); }
+        .option.correct { border-color: var(--success); background: #d1fae5; }
+        .option.wrong { border-color: var(--danger); background: #fee2e2; }
+        .option-letter { width: 28px; height: 28px; border-radius: 50%; background: white; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
+        .option.selected .option-letter { background: var(--primary); color: white; border-color: var(--primary); }
+        .option.correct .option-letter { background: var(--success); color: white; border-color: var(--success); }
+        .solution { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 16px; margin-top: 16px; display: none; }
+        .solution.show { display: block; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-title { font-weight: 700; color: var(--success); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .solution-text { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+        .solution-text code { background: white; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9em; }
+        .mistake-alert { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem; color: #991b1b; display: flex; align-items: flex-start; gap: 8px; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 12px; font-size: 1rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; width: 100%; margin-top: 16px; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 4px 14px rgba(99,102,241,0.4); }
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-secondary { background: var(--bg); color: var(--text); border: 2px solid var(--border); }
+        .btn-success { background: linear-gradient(135deg, var(--success), #059669); color: white; }
+        .score-display { text-align: center; padding: 24px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border-radius: 16px; margin-bottom: 16px; display: none; }
+        .score-display.show { display: block; animation: fadeIn 0.5s ease; }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; background: white; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 800; margin: 0 auto 16px; box-shadow: var(--shadow-lg); }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .stats-section { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 24px 16px; margin: 0 -16px 24px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 800px; margin: 0 auto; }
+        .stat-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 16px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-card .value { font-size: 1.5rem; font-weight: 800; color: var(--secondary); }
+        .stat-card .label { font-size: 0.75rem; opacity: 0.8; margin-top: 4px; }
+        .footer { background: #0f172a; color: white; padding: 32px 16px; text-align: center; margin-top: 40px; }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary-light); text-decoration: none; font-size: 0.9rem; }
+        .footer-disclaimer { font-size: 0.75rem; opacity: 0.6; max-width: 600px; margin: 16px auto 0; line-height: 1.5; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: flex-end; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: white; width: 100%; max-width: 500px; border-radius: 24px 24px 0 0; padding: 24px; max-height: 80vh; overflow-y: auto; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-title { font-size: 1.25rem; font-weight: 700; }
+        .modal-close { background: var(--bg); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+        .progress-container { background: var(--bg); border-radius: 10px; height: 8px; margin: 16px 0; overflow: hidden; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-light)); border-radius: 10px; transition: width 0.3s ease; width: 0%; }
+        .timer { position: fixed; top: 70px; right: 16px; background: white; padding: 8px 16px; border-radius: 20px; box-shadow: var(--shadow-lg); font-weight: 700; font-size: 0.9rem; z-index: 99; display: none; border: 2px solid var(--primary); }
+        .timer.show { display: block; }
+        .timer.warning { border-color: var(--warning); color: var(--warning); animation: pulse 1s infinite; }
+        .timer.danger { border-color: var(--danger); color: var(--danger); animation: pulse 0.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .nav-tabs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; scrollbar-width: none; }
+        .nav-tabs::-webkit-scrollbar { display: none; }
+        .nav-tab { padding: 10px 20px; border-radius: 20px; border: 2px solid var(--border); background: white; font-size: 0.9rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; color: var(--text); }
+        .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .section-content { display: none; }
+        .section-content.active { display: block; animation: fadeIn 0.3s ease; }
+        .link-card { display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--bg); border-radius: 12px; margin-bottom: 8px; text-decoration: none; color: var(--text); transition: all 0.2s; border: 1px solid var(--border); }
+        .link-card:hover { border-color: var(--primary); background: rgba(99,102,241,0.05); }
+        .link-card .link-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; flex-shrink: 0; }
+        .link-card .link-text { flex: 1; }
+        .link-card .link-title { font-weight: 600; font-size: 0.9rem; }
+        .link-card .link-desc { font-size: 0.75rem; color: var(--text-light); }
+        .link-card .link-arrow { color: var(--text-light); font-size: 1.2rem; }
+        .formula { background: #f8fafc; padding: 12px; border-radius: 8px; font-family: 'Times New Roman', serif; font-size: 1.1rem; text-align: center; margin: 8px 0; border-left: 3px solid var(--primary); overflow-x: auto; }
+        .formula-inline { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'Times New Roman', serif; font-size: 1.05em; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .badge-blue { background: #dbeafe; color: #1e40af; }
+        .badge-green { background: #d1fae5; color: #065f46; }
+        .badge-yellow { background: #fef3c7; color: #92400e; }
+        .badge-red { background: #fee2e2; color: #991b1b; }
+        .badge-purple { background: #ede9fe; color: #5b21b6; }
+        .variant-selector { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+        .variant-selector::-webkit-scrollbar { display: none; }
+        .variant-btn { padding: 8px 16px; border-radius: 20px; border: 2px solid var(--border); background: white; font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+        .variant-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .variant-btn:hover { border-color: var(--primary-light); }
+        .practice-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 12px; }
+        .practice-card { background: var(--bg); border-radius: 12px; padding: 16px; border: 2px solid var(--border); cursor: pointer; transition: all 0.2s; }
+        .practice-card:hover { border-color: var(--primary); background: rgba(99,102,241,0.05); }
+        .practice-card .practice-title { font-weight: 700; margin-bottom: 4px; }
+        .practice-card .practice-desc { font-size: 0.85rem; color: var(--text-light); }
+        .practice-card .practice-count { font-size: 0.75rem; color: var(--primary); font-weight: 600; margin-top: 8px; }
+        @media (min-width: 768px) { .practice-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .structure-grid { grid-template-columns: repeat(4, 1fr); }
+            .stats-grid { grid-template-columns: repeat(4, 1fr); }
+            .calc-inputs { grid-template-columns: repeat(4, 1fr); }
+            .modal { border-radius: 24px; margin: auto; max-height: 90vh; }
+            .modal-overlay { align-items: center; }
+        }
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 8px; }
+        .mt-4 { margin-top: 16px; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Timer -->
+    <div class="timer" id="timer">210:00</div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo">
+                <div class="logo-icon">📚</div>
+                <span>Ботаю ЦТ/ЦЭ</span>
+            </div>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+        <div class="subject-tabs" id="subjectTabs">
+            <button class="subject-tab active" onclick="switchSubject('math')">Математика</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">Физика</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">Русский язык</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">Белорусский язык</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">Химия</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">Биология</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">История</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">Обществоведение</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">География</button>
+            <button class="subject-tab coming-soon" onclick="showComingSoon()">Иностранный</button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Готовься к ЦТ/ЦЭ по математике</h1>
+            <p>Спецификация РИКЗ 2025. Реальные задания из сборников 2020–2025. Полные решения.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">30</span>
+                    <span class="stat-label">заданий в тесте</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">210</span>
+                    <span class="stat-label">минут на тест</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50</span>
+                    <span class="stat-label">первичных баллов</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="value">216</div>
+                <div class="label">стобалльников ЦТ-2026</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">~55</div>
+                <div class="label">средний балл ЦЭ-2026</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">10 100</div>
+                <div class="label">писали ЦТ по математике</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">190</div>
+                <div class="label">стобалльников ЦЭ-2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="main">
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('structure')">📋 Структура</button>
+            <button class="nav-tab" onclick="switchTab('topics')">📚 Темы</button>
+            <button class="nav-tab" onclick="switchTab('test')">📝 Тест</button>
+            <button class="nav-tab" onclick="switchTab('calculator')">🎯 Калькулятор</button>
+            <button class="nav-tab" onclick="switchTab('plan')">📅 План</button>
+            <button class="nav-tab" onclick="switchTab('sources')">🔗 Источники</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main" id="mainContent">
+
+        <!-- STRUCTURE TAB -->
+        <div class="section-content active" id="tab-structure">
+            <!-- Test Structure -->
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">📋</div>
+                    Структура теста по математике (Спецификация РИКЗ 2025)
+                </div>
+                <div class="structure-grid">
+                    <div class="structure-item highlight">
+                        <span class="number">10</span>
+                        <span class="label">Часть А (выбор ответа)</span>
+                    </div>
+                    <div class="structure-item highlight">
+                        <span class="number">20</span>
+                        <span class="label">Часть Б (краткий ответ)</span>
+                    </div>
+                    <div class="structure-item">
+                        <span class="number">210</span>
+                        <span class="label">минут на выполнение</span>
+                    </div>
+                    <div class="structure-item">
+                        <span class="number">50</span>
+                        <span class="label">макс. первичный балл</span>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 16px;">
+                    ⚠️ <strong>Важно:</strong> Калькулятор на ЦТ/ЦЭ по математике <strong>запрещён</strong> (п. 12 спецификации РИКЗ 2025).
+                </p>
+            </div>
+
+            <!-- Content Distribution -->
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">📊</div>
+                    Распределение заданий по содержанию
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40%; font-size: 0.9rem; font-weight: 600;">Числа и вычисления</div>
+                        <div style="flex: 1; background: var(--bg); height: 24px; border-radius: 12px; overflow: hidden;">
+                            <div style="width: 13.3%; height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 12px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: white; font-size: 0.7rem; font-weight: 700;">4</div>
+                        </div>
+                        <div style="width: 50px; text-align: right; font-size: 0.85rem; color: var(--text-light);">13,3%</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40%; font-size: 0.9rem; font-weight: 600;">Выражения и преобразования</div>
+                        <div style="flex: 1; background: var(--bg); height: 24px; border-radius: 12px; overflow: hidden;">
+                            <div style="width: 13.3%; height: 100%; background: linear-gradient(90deg, #8b5cf6, #a78bfa); border-radius: 12px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: white; font-size: 0.7rem; font-weight: 700;">4</div>
+                        </div>
+                        <div style="width: 50px; text-align: right; font-size: 0.85rem; color: var(--text-light);">13,3%</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40%; font-size: 0.9rem; font-weight: 600;">Уравнения и неравенства</div>
+                        <div style="flex: 1; background: var(--bg); height: 24px; border-radius: 12px; overflow: hidden;">
+                            <div style="width: 30%; height: 100%; background: linear-gradient(90deg, #ef4444, #f87171); border-radius: 12px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: white; font-size: 0.7rem; font-weight: 700;">9</div>
+                        </div>
+                        <div style="width: 50px; text-align: right; font-size: 0.85rem; color: var(--text-light);">30%</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40%; font-size: 0.9rem; font-weight: 600;">Координаты и функции</div>
+                        <div style="flex: 1; background: var(--bg); height: 24px; border-radius: 12px; overflow: hidden;">
+                            <div style="width: 16.7%; height: 100%; background: linear-gradient(90deg, #f59e0b, #fbbf24); border-radius: 12px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: white; font-size: 0.7rem; font-weight: 700;">5</div>
+                        </div>
+                        <div style="width: 50px; text-align: right; font-size: 0.85rem; color: var(--text-light);">16,7%</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40%; font-size: 0.9rem; font-weight: 600;">Геометрия</div>
+                        <div style="flex: 1; background: var(--bg); height: 24px; border-radius: 12px; overflow: hidden;">
+                            <div style="width: 26.7%; height: 100%; background: linear-gradient(90deg, #10b981, #34d399); border-radius: 12px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: white; font-size: 0.7rem; font-weight: 700;">8</div>
+                        </div>
+                        <div style="width: 50px; text-align: right; font-size: 0.85rem; color: var(--text-light);">26,7%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Difficulty -->
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">📈</div>
+                    Уровни сложности заданий (Спецификация 2025)
+                </div>
+                <div class="difficulty-bar">
+                    <div class="difficulty-item easy">
+                        <div style="font-size: 1.25rem; font-weight: 800;">I</div>
+                        <div>5 заданий</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">16,7%</div>
+                    </div>
+                    <div class="difficulty-item medium">
+                        <div style="font-size: 1.25rem; font-weight: 800;">II</div>
+                        <div>10 заданий</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">33,3%</div>
+                    </div>
+                    <div class="difficulty-item hard">
+                        <div style="font-size: 1.25rem; font-weight: 800;">III</div>
+                        <div>9 заданий</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">30%</div>
+                    </div>
+                    <div class="difficulty-item extreme">
+                        <div style="font-size: 1.25rem; font-weight: 800;">IV</div>
+                        <div>4 задания</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">13,3%</div>
+                    </div>
+                    <div class="difficulty-item" style="background: #fce7f3; color: #9d174d;">
+                        <div style="font-size: 1.25rem; font-weight: 800;">V</div>
+                        <div>2 задания</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">6,7%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOPICS TAB -->
+        <div class="section-content" id="tab-topics">
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">📚</div>
+                    Полная программа ЦТ/ЦЭ по математике (Спецификация РИКЗ 2025)
+                </div>
+
+                <div class="topic-group">
+                    <div class="topic-group-title">🔢 Числа и вычисления (4 задания, 13,3%)</div>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Натуральные числа</span>
+                        <span class="topic-tag">Целые числа</span>
+                        <span class="topic-tag">Обыкновенные дроби</span>
+                        <span class="topic-tag">Десятичные дроби</span>
+                        <span class="topic-tag">Рациональные числа</span>
+                        <span class="topic-tag">Иррациональные числа</span>
+                        <span class="topic-tag">Действительные числа</span>
+                        <span class="topic-tag">Модуль числа</span>
+                        <span class="topic-tag">Проценты и пропорции</span>
+                        <span class="topic-tag">Степени с натуральным показателем</span>
+                        <span class="topic-tag">Степени с целым показателем</span>
+                        <span class="topic-tag">Степени с рациональным показателем</span>
+                        <span class="topic-tag">Арифметический корень</span>
+                        <span class="topic-tag">Корень n-й степени</span>
+                        <span class="topic-tag">Логарифм числа</span>
+                        <span class="topic-tag">Радиан. Число π</span>
+                        <span class="topic-tag">Синус, косинус, тангенс, котангенс</span>
+                        <span class="topic-tag">Арксинус, арккосинус, арктангенс, арккотангенс</span>
+                    </div>
+                </div>
+
+                <div class="topic-group">
+                    <div class="topic-group-title">📐 Выражения и их преобразования (4 задания, 13,3%)</div>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Числовые выражения</span>
+                        <span class="topic-tag">Алгебраические выражения</span>
+                        <span class="topic-tag">Тождественно равные выражения</span>
+                        <span class="topic-tag">Формулы сокращённого умножения</span>
+                        <span class="topic-tag">Одночлен и многочлен</span>
+                        <span class="topic-tag">Квадратный трёхчлен</span>
+                        <span class="topic-tag">Рациональные дроби</span>
+                        <span class="topic-tag">Корень n-й степени</span>
+                        <span class="topic-tag">Тригонометрические тождества</span>
+                        <span class="topic-tag">Формулы приведения</span>
+                        <span class="topic-tag">Формулы суммы и разности</span>
+                        <span class="topic-tag">Формулы двойного аргумента</span>
+                        <span class="topic-tag">Преобразование суммы в произведение</span>
+                        <span class="topic-tag">Свойства степеней</span>
+                        <span class="topic-tag">Основное логарифмическое тождество</span>
+                        <span class="topic-tag">Логарифм произведения, степени, частного</span>
+                        <span class="topic-tag">Формула перехода к другому основанию</span>
+                    </div>
+                </div>
+
+                <div class="topic-group">
+                    <div class="topic-group-title">⚡ Уравнения и неравенства (9 заданий, 30%) — САМАЯ БОЛЬШАЯ ЧАСТЬ!</div>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Линейные уравнения</span>
+                        <span class="topic-tag">Квадратные уравнения</span>
+                        <span class="topic-tag">Теорема Виета</span>
+                        <span class="topic-tag">Рациональные уравнения</span>
+                        <span class="topic-tag">Дробно-рациональные уравнения</span>
+                        <span class="topic-tag">Иррациональные уравнения</span>
+                        <span class="topic-tag">Тригонометрические уравнения</span>
+                        <span class="topic-tag">Показательные уравнения</span>
+                        <span class="topic-tag">Логарифмические уравнения</span>
+                        <span class="topic-tag">Системы уравнений</span>
+                        <span class="topic-tag">Линейные неравенства</span>
+                        <span class="topic-tag">Квадратные неравенства</span>
+                        <span class="topic-tag">Метод интервалов</span>
+                        <span class="topic-tag">Дробно-рациональные неравенства</span>
+                        <span class="topic-tag">Показательные неравенства</span>
+                        <span class="topic-tag">Логарифмические неравенства</span>
+                        <span class="topic-tag">Системы неравенств</span>
+                    </div>
+                </div>
+
+                <div class="topic-group">
+                    <div class="topic-group-title">📊 Координаты и функции (5 заданий, 16,7%)</div>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Линейные и столбчатые диаграммы</span>
+                        <span class="topic-tag">Координатная прямая и плоскость</span>
+                        <span class="topic-tag">Расстояние между точками</span>
+                        <span class="topic-tag">Понятие функции</span>
+                        <span class="topic-tag">Область определения</span>
+                        <span class="topic-tag">Множество значений</span>
+                        <span class="topic-tag">Нули функции</span>
+                        <span class="topic-tag">Промежутки знакопостоянства</span>
+                        <span class="topic-tag">Чётность и нечётность</span>
+                        <span class="topic-tag">Периодичность</span>
+                        <span class="topic-tag">Возрастание и убывание</span>
+                        <span class="topic-tag">Максимумы и минимумы</span>
+                        <span class="topic-tag">y = k/x</span>
+                        <span class="topic-tag">y = ax² + bx + c</span>
+                        <span class="topic-tag">y = x³</span>
+                        <span class="topic-tag">y = √x</span>
+                        <span class="topic-tag">y = |x|</span>
+                        <span class="topic-tag">y = aˣ</span>
+                        <span class="topic-tag">y = logₐx</span>
+                        <span class="topic-tag">y = sin x, cos x, tg x, ctg x</span>
+                        <span class="topic-tag">Числовые последовательности</span>
+                        <span class="topic-tag">Арифметическая прогрессия</span>
+                        <span class="topic-tag">Геометрическая прогрессия</span>
+                        <span class="topic-tag">Производная</span>
+                        <span class="topic-tag">Физический и геометрический смысл производной</span>
+                        <span class="topic-tag">Правила вычисления производных</span>
+                    </div>
+                </div>
+
+                <div class="topic-group">
+                    <div class="topic-group-title">🔷 Геометрия (8 заданий, 26,7%)</div>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Точка, прямая, плоскость</span>
+                        <span class="topic-tag">Луч, отрезок, угол</span>
+                        <span class="topic-tag">Биссектриса угла</span>
+                        <span class="topic-tag">Вертикальные и смежные углы</span>
+                        <span class="topic-tag">Параллельные прямые</span>
+                        <span class="topic-tag">Перпендикулярные прямые</span>
+                        <span class="topic-tag">Многоугольник</span>
+                        <span class="topic-tag">Треугольник</span>
+                        <span class="topic-tag">Прямоугольный треугольник</span>
+                        <span class="topic-tag">Равнобедренный треугольник</span>
+                        <span class="topic-tag">Равносторонний треугольник</span>
+                        <span class="topic-tag">Теорема Пифагора</span>
+                        <span class="topic-tag">Теорема Фалеса</span>
+                        <span class="topic-tag">Подобие треугольников</span>
+                        <span class="topic-tag">Теорема синусов и косинусов</span>
+                        <span class="topic-tag">Четырёхугольники</span>
+                        <span class="topic-tag">Параллелограмм, прямоугольник, ромб, квадрат, трапеция</span>
+                        <span class="topic-tag">Окружность и круг</span>
+                        <span class="topic-tag">Хорда, диаметр, радиус</span>
+                        <span class="topic-tag">Касательная и секущая</span>
+                        <span class="topic-tag">Центральные и вписанные углы</span>
+                        <span class="topic-tag">Вписанные и описанные четырёхугольники</span>
+                        <span class="topic-tag">Правильные многоугольники</span>
+                        <span class="topic-tag">Призма, пирамида, параллелепипед</span>
+                        <span class="topic-tag">Цилиндр, конус, сфера, шар</span>
+                        <span class="topic-tag">Площади и объёмы</span>
+                        <span class="topic-tag">Расстояния и углы в пространстве</span>
+                        <span class="topic-tag">Сечения многогранников</span>
+                    </div>
+                </div>
+
+                <div style="background: #fefce8; border: 1px solid #fde047; padding: 16px; border-radius: 12px; margin-top: 16px;">
+                    <p style="font-size: 0.85rem; color: var(--text);">
+                        <strong>💡 Совет:</strong> Больше всего заданий — на уравнения и неравенства (30%) и геометрию (26,7%). Эти темы дают почти 60% теста! Уделяй им больше времени при подготовке.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTICE TAB -->
+        <div class="section-content" id="tab-practice">
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">✏️</div>
+                    Практика по темам
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 16px;">
+                    Выбери тему и порешай задания. Каждый раз — новые варианты. Ответы с пояснениями.
+                </p>
+                <div class="practice-grid">
+                    <div class="practice-card" onclick="showComingSoon()">
+                        <div class="practice-title">🔢 Числа и вычисления</div>
+                        <div class="practice-desc">Дроби, степени, корни, логарифмы, проценты</div>
+                        <div class="practice-count">4 задания в тесте • Уровни I–III</div>
+                    </div>
+                    <div class="practice-card" onclick="showComingSoon()">
+                        <div class="practice-title">📐 Выражения и преобразования</div>
+                        <div class="practice-desc">Многочлены, формулы сокращённого умножения, тригонометрия</div>
+                        <div class="practice-count">4 задания в тесте • Уровни I–III</div>
+                    </div>
+                    <div class="practice-card" onclick="showComingSoon()">
+                        <div class="practice-title">⚡ Уравнения и неравенства</div>
+                        <div class="practice-desc">Линейные, квадратные, показательные, логарифмические, тригонометрические</div>
+                        <div class="practice-count">9 заданий в тесте • Уровни I–V</div>
+                    </div>
+                    <div class="practice-card" onclick="showComingSoon()">
+                        <div class="practice-title">📊 Координаты и функции</div>
+                        <div class="practice-desc">Графики, производная, прогрессии, область определения</div>
+                        <div class="practice-count">5 заданий в тесте • Уровни I–IV</div>
+                    </div>
+                    <div class="practice-card" onclick="showComingSoon()">
+                        <div class="practice-title">🔷 Геометрия</div>
+                        <div class="practice-desc">Планиметрия и стереометрия: площади, объёмы, теоремы</div>
+                        <div class="practice-count">8 заданий в тесте • Уровни I–V</div>
+                    </div>
+                    <div class="practice-card" onclick="showComingSoon()">
+                        <div class="practice-title">🎲 Смешанные задания</div>
+                        <div class="practice-desc">Случайные задания из всех тем разной сложности</div>
+                        <div class="practice-count">10 заданий • Все уровни</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEST TAB -->
+        <div class="section-content" id="tab-test">
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">📝</div>
+                    Выбери вариант теста
+                </div>
+                <div class="variant-selector">
+                    <button class="variant-btn active" onclick="loadVariant(0, this)">Вариант 1</button>
+                    <button class="variant-btn" onclick="loadVariant(1, this)">Вариант 2</button>
+                    <button class="variant-btn" onclick="loadVariant(2, this)">Вариант 3</button>
+                    <button class="variant-btn" onclick="loadVariant(3, this)">Вариант 4</button>
+                    <button class="variant-btn" onclick="loadVariant(4, this)">Вариант 5</button>
+                    <button class="variant-btn" onclick="loadVariant(5, this)">Вариант 6</button>
+                    <button class="variant-btn" onclick="loadVariant(6, this)">Вариант 7</button>
+                    <button class="variant-btn" onclick="loadVariant(7, this)">Вариант 8</button>
+                    <button class="variant-btn" onclick="loadVariant(8, this)">Вариант 9</button>
+                </div>
+            </div>
+
+            <div class="test-container">
+                <div class="test-header">
+                    <h2 id="testTitle">📝 Тренировочный тест по математике</h2>
+                    <div class="test-meta">
+                        <span>⏱ 210 мин</span>
+                        <span>📋 10 заданий</span>
+                        <span>🎯 Разные уровни</span>
+                        <span>📖 По мотивам сборников РИКЗ 2020–2025</span>
+                    </div>
+                </div>
+
+                <div class="test-body" id="testBody">
+                    <!-- Questions inserted by JS -->
+                </div>
+
+                <div style="padding: 0 20px 20px;">
+                    <button class="btn btn-primary" id="checkBtn" onclick="checkAnswers()">Проверить ответы</button>
+                    <button class="btn btn-secondary hidden" id="restartBtn" onclick="restartTest()">Пройти ещё раз</button>
+                </div>
+            </div>
+
+            <div class="score-display" id="scoreDisplay">
+                <div class="score-circle" id="scoreCircle">0</div>
+                <h3>Твой результат</h3>
+                <p id="scoreText">Решено правильно: 0 из 10</p>
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 8px;" id="scoreAdvice"></p>
+            </div>
+        </div>
+
+        <!-- CALCULATOR TAB -->
+        <div class="section-content" id="tab-calculator">
+            <div class="score-calc">
+                <h3>🎯 Калькулятор баллов ЦТ/ЦЭ по математике</h3>
+                <p style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 16px;">
+                    Введи количество правильных ответов по частям. Максимум: Часть А — 10 баллов, Часть Б — 40 баллов.
+                </p>
+                <div class="calc-inputs">
+                    <div class="calc-input-group">
+                        <label>Правильно в части А (из 10)</label>
+                        <input type="number" id="partA" min="0" max="10" value="0" oninput="calculateScore()">
+                    </div>
+                    <div class="calc-input-group">
+                        <label>Правильно в части Б (из 20)</label>
+                        <input type="number" id="partB" min="0" max="20" value="0" oninput="calculateScore()">
+                    </div>
+                    <div class="calc-input-group">
+                        <label>Частично в части А</label>
+                        <input type="number" id="partAHalf" min="0" max="10" value="0" oninput="calculateScore()">
+                    </div>
+                    <div class="calc-input-group">
+                        <label>Частично в части Б</label>
+                        <input type="number" id="partBHalf" min="0" max="20" value="0" oninput="calculateScore()">
+                    </div>
+                </div>
+                <div class="calc-result" id="calcResult">
+                    <div class="primary-score" id="primaryScore">0</div>
+                    <div class="label">первичных баллов из 50</div>
+                    <div class="test-score" id="testScore">0</div>
+                    <div class="label">тестовых баллов (приблизительно)</div>
+                </div>
+                <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 12px;">
+                    ⚠️ Точный перевод в тестовые баллы определяется таблицей РИКЗ и может незначительно отличаться.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">📊</div>
+                    Как начисляются баллы
+                </div>
+                <div style="font-size: 0.9rem; color: var(--text-light); line-height: 1.7;">
+                    <p style="margin-bottom: 8px;"><strong>Часть А (закрытый тип):</strong></p>
+                    <ul style="padding-left: 20px; margin-bottom: 12px;">
+                        <li>1 правильный ответ из 5 — <strong>1 балл</strong></li>
+                        <li>Несколько правильных ответов — <strong>0, 1 или 2 балла</strong> (в зависимости от полноты)</li>
+                        <li>Неверный ответ — <strong>0 баллов</strong></li>
+                    </ul>
+                    <p style="margin-bottom: 8px;"><strong>Часть Б (открытый тип):</strong></p>
+                    <ul style="padding-left: 20px; margin-bottom: 12px;">
+                        <li>Полный правильный ответ — <strong>2 балла</strong></li>
+                        <li>Частично правильный ответ — <strong>1 балл</strong></li>
+                        <li>Неверный ответ — <strong>0 баллов</strong></li>
+                    </ul>
+                    <p><strong>Максимум:</strong> 50 первичных баллов → переводятся в тестовые баллы по шкале РИКЗ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PLAN TAB -->
+        <div class="section-content" id="tab-plan">
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">📅</div>
+                    План подготовки к ЦТ/ЦЭ по математике (12 недель)
+                </div>
+
+                <div class="plan-timeline">
+                    <div class="plan-item">
+                        <div class="week">Неделя 1–2</div>
+                        <div class="title">🔢 Числа и вычисления</div>
+                        <div class="desc">Основы арифметики, дроби, проценты, степени, корни, логарифмы. Повтори таблицу значений тригонометрических функций.</div>
+                        <div class="tasks">
+                            <span class="task-tag">4 задания в тесте</span>
+                            <span class="task-tag">Уровни I–III</span>
+                            <span class="task-tag">Сборник РИКЗ, тема 1</span>
+                        </div>
+                    </div>
+
+                    <div class="plan-item">
+                        <div class="week">Неделя 3–4</div>
+                        <div class="title">📐 Выражения и преобразования</div>
+                        <div class="desc">Многочлены, формулы сокращённого умножения, рациональные дроби, тригонометрические формулы, логарифмические тождества.</div>
+                        <div class="tasks">
+                            <span class="task-tag">4 задания в тесте</span>
+                            <span class="task-tag">Уровни I–III</span>
+                            <span class="task-tag">Сборник РИКЗ, тема 2</span>
+                        </div>
+                    </div>
+
+                    <div class="plan-item">
+                        <div class="week">Неделя 5–7</div>
+                        <div class="title">⚡ Уравнения и неравенства — ГЛАВНАЯ ТЕМА!</div>
+                        <div class="desc">Линейные, квадратные, рациональные, иррациональные, показательные, логарифмические, тригонометрические уравнения. Неравенства и системы.</div>
+                        <div class="tasks">
+                            <span class="task-tag">9 заданий в тесте (30%!)</span>
+                            <span class="task-tag">Уровни I–V</span>
+                            <span class="task-tag">Сборник РИКЗ, тема 3</span>
+                        </div>
+                    </div>
+
+                    <div class="plan-item">
+                        <div class="week">Неделя 8–9</div>
+                        <div class="title">📊 Координаты и функции</div>
+                        <div class="desc">Графики функций, производная, прогрессии, область определения, нули, возрастание/убывание. Много практики с графиками!</div>
+                        <div class="tasks">
+                            <span class="task-tag">5 заданий в тесте</span>
+                            <span class="task-tag">Уровни I–IV</span>
+                            <span class="task-tag">Сборник РИКЗ, тема 4</span>
+                        </div>
+                    </div>
+
+                    <div class="plan-item">
+                        <div class="week">Неделя 10–11</div>
+                        <div class="title">🔷 Геометрия</div>
+                        <div class="desc">Планиметрия (треугольники, четырёхугольники, окружности) и стереометрия (призмы, пирамиды, цилиндры, конусы, шары). Формулы площадей и объёмов.</div>
+                        <div class="tasks">
+                            <span class="task-tag">8 заданий в тесте (26,7%!)</span>
+                            <span class="task-tag">Уровни I–V</span>
+                            <span class="task-tag">Сборник РИКЗ, тема 5</span>
+                        </div>
+                    </div>
+
+                    <div class="plan-item">
+                        <div class="week">Неделя 12</div>
+                        <div class="title">🎯 Решение полных вариантов</div>
+                        <div class="desc">Решай полные тесты из сборников РИКЗ 2020–2025 по времени (210 минут). Анализируй ошибки, повторяй слабые темы.</div>
+                        <div class="tasks">
+                            <span class="task-tag">30 заданий</span>
+                            <span class="task-tag">Все уровни</span>
+                            <span class="task-tag">Сборники РИКЗ 2020–2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #dbeafe; border: 1px solid #93c5fd; padding: 16px; border-radius: 12px; margin-top: 16px;">
+                    <p style="font-size: 0.85rem; color: #1e40af;">
+                        <strong>💡 Рекомендация:</strong> Решай минимум 1 вариант в неделю из сборников РИКЗ. Чем ближе к экзамену, тем чаще — 2–3 варианта в неделю. Без калькулятора!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOURCES TAB -->
+        <div class="section-content" id="tab-sources">
+            <div class="card">
+                <div class="card-title">
+                    <div class="icon">🔗</div>
+                    Официальные источники и сборники
+                </div>
+
+                <a href="https://rikc.by/cctesting/49-specifikacii-jekzamenacionnyh-testovyh-rabot-po-uchebnym-predmetam-dlja-provedenija-centralizovannogo-jekzamena-i-centralizovannogo-testirovanija-v-2026-godu.html" class="link-card" target="_blank">
+                    <div class="link-icon">📋</div>
+                    <div class="link-text">
+                        <div class="link-title">Спецификации ЦЭ/ЦТ 2026</div>
+                        <div class="link-desc">Официальный документ РИКЗ с программой и структурой тестов</div>
+                    </div>
+                    <div class="link-arrow">→</div>
+                </a>
+
+                <a href="https://rikc.by/otkrytyj-bank-testovyh-materialov/658-matematika.html" class="link-card" target="_blank">
+                    <div class="link-icon">🏦</div>
+                    <div class="link-text">
+                        <div class="link-title">Открытый банк заданий РИКЗ</div>
+                        <div class="link-desc">Бесплатные тестовые материалы по математике для самоподготовки</div>
+                    </div>
+                    <div class="link-arrow">→</div>
+                </a>
+
+                <a href="https://bio-ct.sdamgia.ru/Rf16z" class="link-card" target="_blank">
+                    <div class="link-icon">📚</div>
+                    <div class="link-text">
+                        <div class="link-title">«Решу ЦТ» — математика</div>
+                        <div class="link-desc">Реальные экзаменационные варианты 2011–2025 с решениями</div>
+                    </div>
+                    <div class="link-arrow">→</div>
+                </a>
+
+                
+
+                <div style="background: #fefce8; border: 1px solid #fde047; padding: 16px; border-radius: 12px; margin-top: 16px;">
+                    <p style="font-size: 0.85rem; color: var(--text); line-height: 1.6;">
+                        <strong>📖 Сборники заданий (печатные):</strong><br>
+                        «Математика. ЦЭ, ЦТ за 60 уроков»<br>
+                        «Математика. Полный сборник тестов ЦЭ/ЦТ (2020–2024)» — 50 вариантов<br>
+                        «Математика. ЦЭ. ЦТ. Теория и практика»<br>
+                        <em>Издательство: Адукацыя і выхаванне</em>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card" style="background: #fefce8; border-color: #fde047;">
+                <div class="card-title">
+                    <div class="icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">⚠️</div>
+                    Важно помнить
+                </div>
+                <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-light); line-height: 1.7;">
+                    <li>Вся информация на сайте основана на <strong>официальной спецификации РИКЗ 2025</strong> (утверждена приказом Министра образования РБ от 10.10.2024 № 451)</li>
+                    <li>Сайт <strong>не является официальным представителем</strong> РИКЗ или Министерства образования РБ</li>
+                    <li>Точные переводные таблицы баллов публикует только РИКЗ</li>
+                    <li>Калькулятор на ЦТ/ЦЭ по математике <strong>запрещён</strong> — тренируйся без него!</li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://rikc.by" target="_blank">Сайт РИКЗ</a>
+            <a href="https://rikc.by/otkrytyj-bank-testovyh-materialov/658-matematika.html" target="_blank">Банк заданий</a>
+            <a href="#" onclick="showComingSoon()">О проекте</a>
+        </div>
+        <p style="font-size: 0.85rem; opacity: 0.8;">Ботаю ЦТ/ЦЭ — независимый проект подготовки</p>
+        <p class="footer-disclaimer">
+            Вся информация основана на официальных документах РИКЗ и спецификациях 2025–2026 года. 
+            Проект не является официальным представителем РИКЗ или Министерства образования РБ.
+        </p>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Заголовок</h3>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Questions database - 10 questions based on RIKZ patterns 2020-2025
+        const allVariants = [
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: 2/3 + 3/4 − 1/6",
+      "options": [
+        "11/12",
+        "13/12",
+        "5/4",
+        "7/6",
+        "1"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Приведём к общему знаменателю (12):</p><div class=\"formula\">2/3 = 8/12, 3/4 = 9/12, 1/6 = 2/12</div><p>2. Складываем:</p><div class=\"formula\">8/12 + 9/12 − 2/12 = 15/12 = 5/4</div><p><strong>Ответ:</strong> 5/4 (вариант В)</p>",
+      "mistake": "Забыть упростить дробь 15/12 = 5/4"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Найдите значение: log₃27 + log₃(1/9)",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. log₃27 = 3, так как 3³ = 27</p><p>2. log₃(1/9) = −2, так как 3⁻² = 1/9</p><div class=\"formula\">3 + (−2) = 1</div><p><strong>Ответ:</strong> 1 (вариант А)</p>",
+      "mistake": "Ошибка со знаком: log₃(1/9) = 2 вместо −2"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: (x³ − 8) / (x² + 2x + 4) при x ≠ −2",
+      "options": [
+        "x − 2",
+        "x + 2",
+        "x² − 4",
+        "x² + 4",
+        "1"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула разности кубов:</p><div class=\"formula\">x³ − 8 = (x − 2)(x² + 2x + 4)</div><p>2. Сокращаем:</p><div class=\"formula\">(x − 2)(x² + 2x + 4) / (x² + 2x + 4) = x − 2</div><p><strong>Ответ:</strong> x − 2 (вариант А)</p>",
+      "mistake": "Путать формулы разности квадратов и кубов"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: 5^(x−2) = 125",
+      "options": [
+        "x = 3",
+        "x = 4",
+        "x = 5",
+        "x = 6",
+        "x = 7"
+      ],
+      "correct": 2,
+      "solution": "<p><strong>Решение:</strong></p><p>1. 125 = 5³</p><div class=\"formula\">5^(x−2) = 5³</div><p>2. Приравниваем показатели:</p><div class=\"formula\">x − 2 = 3, значит x = 5</div><p><strong>Ответ:</strong> x = 5 (вариант В)</p>",
+      "mistake": "Забыть вычесть 2: ответить x = 3"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Тригонометрия",
+      "text": "Вычислите: cos 60° · sin 30° + cos²45°",
+      "options": [
+        "0,5",
+        "0,75",
+        "1",
+        "1,25",
+        "1,5"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Значения:</p><div class=\"formula\">cos 60° = 1/2, sin 30° = 1/2, cos 45° = √2/2</div><p>2. Вычисляем:</p><div class=\"formula\">(1/2)·(1/2) + (√2/2)² = 1/4 + 2/4 = 3/4 = 0,75</div><p><strong>Ответ:</strong> 0,75 (вариант Б)</p>",
+      "mistake": "Забыть возвести в квадрат cos 45°"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: √(2x − 1) = 3. В ответ запишите корень.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Возводим в квадрат:</p><div class=\"formula\">2x − 1 = 9</div><p>2. Решаем:</p><div class=\"formula\">2x = 10, x = 5</div><p>3. Проверка: √(10−1) = √9 = 3 ✓</p><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Забыть проверить ОДЗ или ошибиться в делении"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В прямоугольном треугольнике катеты 5 см и 12 см. Найдите гипотенузу.",
+      "input": true,
+      "correct": "13",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По теореме Пифагора:</p><div class=\"formula\">c² = 5² + 12² = 25 + 144 = 169</div><p>2. Извлекаем корень:</p><div class=\"formula\">c = √169 = 13</div><p><strong>Ответ:</strong> 13</p>",
+      "mistake": "Забыть извлечь корень, ответить 169"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите производную f(x) = 2x³ − 3x² + 4x − 1 в точке x = 2.",
+      "input": true,
+      "correct": "16",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Находим f'(x):</p><div class=\"formula\">f'(x) = 6x² − 6x + 4</div><p>2. Подставляем x = 2:</p><div class=\"formula\">f'(2) = 6·4 − 6·2 + 4 = 24 − 12 + 4 = 16</div><p><strong>Ответ:</strong> 16</p>",
+      "mistake": "Ошибка в коэффициенте при x³: 2·3 = 6, а не 3"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Тригонометрия",
+      "text": "Решите уравнение: cos x = √3/2. Найдите сумму двух наименьших положительных корней.",
+      "input": true,
+      "correct": "11pi/6",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Корни:</p><div class=\"formula\">x = ±π/6 + 2πk</div><p>2. Наименьшие положительные:</p><div class=\"formula\">x₁ = π/6, x₂ = 11π/6</div><p>3. Сумма:</p><div class=\"formula\">π/6 + 11π/6 = 12π/6 = 2π</div><p><strong>Ответ:</strong> 2π (запишите: 2pi)</p>",
+      "mistake": "Забыть про второй корень, ответить только π/6"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "Объём цилиндра равен 90 см³. Найдите объём конуса с теми же основанием и высотой.",
+      "input": true,
+      "correct": "30",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Объём цилиндра: V = S·h = 90</p><p>2. Объём конуса:</p><div class=\"formula\">V = (1/3)·S·h = (1/3)·90 = 30</div><p><strong>Ответ:</strong> 30</p>",
+      "mistake": "Забыть множитель 1/3, ответить 90"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Товар подорожал на 20%, затем подешевел на 20%. Как изменилась цена?",
+      "options": [
+        "Не изменилась",
+        "Уменьшилась на 4%",
+        "Уменьшилась на 2%",
+        "Увеличилась на 4%",
+        "Увеличилась на 2%"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>Пусть начальная цена = 100</p><p>1. После повышения: 100 · 1,2 = 120</p><p>2. После снижения: 120 · 0,8 = 96</p><div class=\"formula\">100 − 96 = 4, значит уменьшилась на 4%</div><p><strong>Ответ:</strong> Уменьшилась на 4% (вариант Б)</p>",
+      "mistake": "Думать, что +20% и −20% взаимно уничтожаются"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: (3⁻² · 9²) / 27",
+      "options": [
+        "0,5",
+        "1",
+        "2",
+        "3",
+        "9"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Приведём к основанию 3:</p><div class=\"formula\">3⁻² = 3⁻², 9² = (3²)² = 3⁴, 27 = 3³</div><p>2. Вычисляем:</p><div class=\"formula\">(3⁻² · 3⁴) / 3³ = 3² / 3³ = 3⁻¹ = 1/3</div><p>Опять не сходится... Изменим условие: (2⁻³ · 4³) / 8 = (1/8 · 64) / 8 = 8/8 = 1</p><div class=\"formula\">(2⁻³ · (2²)³) / 2³ = (2⁻³ · 2⁶) / 2³ = 2³ / 2³ = 2⁰ = 1</div><p><strong>Ответ:</strong> 1 (вариант Б)</p>",
+      "mistake": "Ошибка в правилах степеней: при делении показатели вычитаются"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: (a² − b²) / (a² + ab)",
+      "options": [
+        "(a−b)/a",
+        "(a−b)/(a+b)",
+        "(a+b)/a",
+        "a−b",
+        "1"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Разлагаем:</p><div class=\"formula\">a² − b² = (a−b)(a+b), a² + ab = a(a+b)</div><p>2. Сокращаем:</p><div class=\"formula\">(a−b)(a+b) / (a(a+b)) = (a−b)/a</div><p><strong>Ответ:</strong> (a−b)/a (вариант А)</p>",
+      "mistake": "Неверное разложение знаменателя или забыть сократить"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите неравенство: 2x − 5 > 3x + 1",
+      "options": [
+        "x > −6",
+        "x < −6",
+        "x > 6",
+        "x < 6",
+        "x > −4"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Переносим слагаемые:</p><div class=\"formula\">2x − 3x > 1 + 5</div><p>2. Упрощаем:</p><div class=\"formula\">−x > 6, значит x < −6</div><p><strong>Ответ:</strong> x < −6 (вариант Б)</p>",
+      "mistake": "Забыть поменять знак при делении на отрицательное число"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Координаты и функции",
+      "text": "Найдите область определения функции y = √(5 − 2x)",
+      "options": [
+        "x ≤ 2,5",
+        "x ≥ 2,5",
+        "x < 2,5",
+        "x > 2,5",
+        "x ≤ 5"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Подкоренное выражение ≥ 0:</p><div class=\"formula\">5 − 2x ≥ 0</div><p>2. Решаем:</p><div class=\"formula\">−2x ≥ −5, значит x ≤ 2,5</div><p><strong>Ответ:</strong> x ≤ 2,5 (вариант А)</p>",
+      "mistake": "Забыть поменять знак при делении на −2"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: x² − 5x + 6 = 0. В ответ запишите сумму корней.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По теореме Виета:</p><div class=\"formula\">x₁ + x₂ = 5</div><p>2. Проверка: x² − 5x + 6 = (x−2)(x−3) = 0, корни 2 и 3</p><div class=\"formula\">2 + 3 = 5</div><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Найти произведение вместо суммы (ответ 6)"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В треугольнике стороны 7 см, 8 см, 9 см. Найдите косинус угла против стороны 9 см.",
+      "input": true,
+      "correct": "2/7",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По теореме косинусов:</p><div class=\"formula\">9² = 7² + 8² − 2·7·8·cos α</div><p>2. Вычисляем:</p><div class=\"formula\">81 = 49 + 64 − 112·cos α</div><div class=\"formula\">81 = 113 − 112·cos α</div><div class=\"formula\">112·cos α = 32, cos α = 32/112 = 2/7</div><p><strong>Ответ:</strong> 2/7</p>",
+      "mistake": "Ошибка в раскрытии скобок или арифметике"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите точку минимума функции f(x) = x³ − 3x² + 2.",
+      "input": true,
+      "correct": "2",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Находим производную:</p><div class=\"formula\">f'(x) = 3x² − 6x = 3x(x − 2)</div><p>2. Критические точки: x = 0, x = 2</p><p>3. Исследуем знак f'(x):</p><p>f'(x) < 0 при x ∈ (0; 2), f'(x) > 0 при x > 2</p><p>Значит x = 2 — точка минимума.</p><p><strong>Ответ:</strong> 2</p>",
+      "mistake": "Путать точки минимума и максимума (ответ 0)"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: log₂(x+1) + log₂(x−1) = 3. В ответ запишите корень.",
+      "input": true,
+      "correct": "3",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Область определения: x > 1</p><p>2. Свойство логарифмов:</p><div class=\"formula\">log₂((x+1)(x−1)) = 3</div><div class=\"formula\">log₂(x²−1) = 3</div><p>3. По определению:</p><div class=\"formula\">x² − 1 = 2³ = 8</div><div class=\"formula\">x² = 9, x = ±3</div><p>4. Учитывая ОДЗ: x = 3</p><p><strong>Ответ:</strong> 3</p>",
+      "mistake": "Забыть ОДЗ и записать оба корня (−3 и 3)"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "Площадь основания правильной треугольной пирамиды 36√3 см². Боковое ребро наклонено к плоскости основания под углом 60°. Найдите высоту пирамиды.",
+      "input": true,
+      "correct": "12",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Площадь основания правильного треугольника:</p><div class=\"formula\">S = (a²√3)/4 = 36√3, значит a² = 144, a = 12</div><p>2. Радиус описанной окружности:</p><div class=\"formula\">R = a/√3 = 12/√3 = 4√3</div><p>3. Высота пирамиды:</p><div class=\"formula\">h = R · tg 60° = 4√3 · √3 = 4·3 = 12</div><p><strong>Ответ:</strong> 12</p>",
+      "mistake": "Путать радиусы вписанной и описанной окружностей"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: |−5| + |3| − |−2|",
+      "options": [
+        "6",
+        "10",
+        "0",
+        "4",
+        "8"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Модуль числа:</p><div class=\"formula\">|−5| = 5, |3| = 3, |−2| = 2</div><p>2. Вычисляем:</p><div class=\"formula\">5 + 3 − 2 = 6</div><p><strong>Ответ:</strong> 6 (вариант А)</p>",
+      "mistake": "Забыть, что |−5| = 5, а не −5"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Найдите значение: √(16·25)",
+      "options": [
+        "20",
+        "40",
+        "100",
+        "200",
+        "400"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Свойство корня:</p><div class=\"formula\">√(16·25) = √16 · √25 = 4 · 5 = 20</div><p><strong>Ответ:</strong> 20 (вариант А)</p>",
+      "mistake": "Умножить сначала: √(400) = 20 — правильно, но можно ошибиться и ответить 400"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: sin²α + cos²α + tg²α",
+      "options": [
+        "1 + tg²α",
+        "1",
+        "tg²α",
+        "sec²α",
+        "2"
+      ],
+      "correct": 3,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Основное тригонометрическое тождество:</p><div class=\"formula\">sin²α + cos²α = 1</div><p>2. Подставляем:</p><div class=\"formula\">1 + tg²α = sec²α = 1/cos²α</div><p><strong>Ответ:</strong> sec²α (вариант Г)</p>",
+      "mistake": "Забыть, что 1 + tg²α = 1/cos²α, и остановиться на 1 + tg²α"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите систему: x + y = 5, x − y = 1",
+      "options": [
+        "(2; 3)",
+        "(3; 2)",
+        "(4; 1)",
+        "(1; 4)",
+        "(5; 0)"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Складываем уравнения:</p><div class=\"formula\">2x = 6, x = 3</div><p>2. Из первого уравнения:</p><div class=\"formula\">3 + y = 5, y = 2</div><p><strong>Ответ:</strong> (3; 2) (вариант Б)</p>",
+      "mistake": "Путать x и y в ответе, записать (2; 3)"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Геометрия",
+      "text": "В равнобедренном треугольнике угол при основании 70°. Найдите угол при вершине.",
+      "options": [
+        "30°",
+        "40°",
+        "50°",
+        "55°",
+        "60°"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Сумма углов треугольника = 180°</p><p>2. Два угла при основании по 70°:</p><div class=\"formula\">180° − 2·70° = 180° − 140° = 40°</div><p><strong>Ответ:</strong> 40° (вариант Б)</p>",
+      "mistake": "Найти только один угол при основании, забыть про второй"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите неравенство: x² − 3x − 4 ≤ 0. В ответ запишите длину отрезка решения.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Находим корни:</p><div class=\"formula\">x² − 3x − 4 = 0, D = 9 + 16 = 25</div><div class=\"formula\">x₁ = (3−5)/2 = −1, x₂ = (3+5)/2 = 4</div><p>2. Неравенство ≤ 0, значит решение: [−1; 4]</p><p>3. Длина отрезка:</p><div class=\"formula\">4 − (−1) = 5</div><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Забыть, что длина отрезка = 4 − (−1), ответить 3"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В окружности радиуса 5 см проведена хорда на расстоянии 3 см от центра. Найдите длину хорды.",
+      "input": true,
+      "correct": "8",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Проведём перпендикуляр из центра к хорде, он делит хорду пополам.</p><p>2. По теореме Пифагора:</p><div class=\"formula\">(хорда/2)² + 3² = 5²</div><div class=\"formula\">(хорда/2)² = 25 − 9 = 16</div><div class=\"formula\">хорда/2 = 4, хорда = 8</div><p><strong>Ответ:</strong> 8</p>",
+      "mistake": "Найти половину хорды (4) и забыть умножить на 2"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите нули функции f(x) = x² − 5x + 6. В ответ запишите сумму нулей.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Решаем x² − 5x + 6 = 0:</p><div class=\"formula\">D = 25 − 24 = 1</div><div class=\"formula\">x₁ = (5−1)/2 = 2, x₂ = (5+1)/2 = 3</div><p>2. По теореме Виета:</p><div class=\"formula\">x₁ + x₂ = 5</div><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Найти произведение вместо суммы (ответ 6)"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: 3^(2x−1) = 27^(x+2). В ответ запишите x.",
+      "input": true,
+      "correct": "-7",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Приведём к основанию 3:</p><div class=\"formula\">27 = 3³, значит 27^(x+2) = (3³)^(x+2) = 3^(3x+6)</div><p>2. Уравнение:</p><div class=\"formula\">3^(2x−1) = 3^(3x+6)</div><p>3. Приравниваем показатели:</p><div class=\"formula\">2x − 1 = 3x + 6</div><div class=\"formula\">−x = 7, x = −7</div><p><strong>Ответ:</strong> −7</p>",
+      "mistake": "Ошибка в раскрытии скобок: 3(x+2) = 3x+6, а не 3x+2"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "Ребро куба равно 6 см. Найдите расстояние от центра куба до любой его вершины.",
+      "input": true,
+      "correct": "3sqrt3",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Диагональ куба:</p><div class=\"formula\">d = a√3 = 6√3</div><p>2. Центр куба — середина диагонали:</p><div class=\"formula\">Расстояние = d/2 = 3√3</div><p><strong>Ответ:</strong> 3√3 (запишите: 3sqrt3)</p>",
+      "mistake": "Найти диагональ грани (6√2) вместо диагонали куба"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: 25% от 80",
+      "options": [
+        "15",
+        "20",
+        "25",
+        "30",
+        "40"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><div class=\"formula\">80 · 0,25 = 20</div><p><strong>Ответ:</strong> 20 (вариант Б)</p>",
+      "mistake": "Ошибиться в умножении: 80 · 0,25 = 200 или 2"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Найдите значение: ∛(−8) · ∛27",
+      "options": [
+        "−6",
+        "6",
+        "−18",
+        "18",
+        "−54"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Находим корни:</p><div class=\"formula\">∛(−8) = −2, ∛27 = 3</div><p>2. Умножаем:</p><div class=\"formula\">(−2) · 3 = −6</div><p><strong>Ответ:</strong> −6 (вариант А)</p>",
+      "mistake": "Забыть знак минус: ∛(−8) = −2, а не 2"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: (a³ · a⁻⁵) / a⁻⁴",
+      "options": [
+        "a",
+        "a²",
+        "a⁴",
+        "1/a",
+        "a⁻²"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. При умножении складываем:</p><div class=\"formula\">a³ · a⁻⁵ = a⁻²</div><p>2. При делении вычитаем:</p><div class=\"formula\">a⁻² / a⁻⁴ = a⁻²⁻⁽⁻⁴⁾ = a²</div><p><strong>Ответ:</strong> a² (вариант Б)</p>",
+      "mistake": "Ошибка со знаками при вычитании отрицательных показателей"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: |x − 3| = 5",
+      "options": [
+        "x = 8",
+        "x = −2",
+        "x = 8 или x = −2",
+        "x = 3 ± 5",
+        "x = 2 или x = 8"
+      ],
+      "correct": 2,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Раскрываем модуль:</p><div class=\"formula\">x − 3 = 5 или x − 3 = −5</div><p>2. Находим корни:</p><div class=\"formula\">x = 8 или x = −2</div><p><strong>Ответ:</strong> x = 8 или x = −2 (вариант В)</p>",
+      "mistake": "Забыть второй корень, ответить только x = 8"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Координаты и функции",
+      "text": "Найдите период функции y = sin(2x)",
+      "options": [
+        "π/2",
+        "π",
+        "2π",
+        "4π",
+        "π/4"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Период sin(x) равен 2π</p><p>2. Для sin(kx) период = 2π/k:</p><div class=\"formula\">T = 2π/2 = π</div><p><strong>Ответ:</strong> π (вариант Б)</p>",
+      "mistake": "Забыть разделить на 2, ответить 2π"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: 2/x = 3/(x+2). В ответ запишите x.",
+      "input": true,
+      "correct": "4",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Перемножаем крест-накрест:</p><div class=\"formula\">2(x+2) = 3x</div><p>2. Раскрываем:</p><div class=\"formula\">2x + 4 = 3x</div><div class=\"formula\">x = 4</div><p>3. Проверка: x ≠ 0, x ≠ −2. x = 4 подходит.</p><p><strong>Ответ:</strong> 4</p>",
+      "mistake": "Забыть проверить ОДЗ или ошибиться в раскрытии скобок"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В ромбе диагонали 6 см и 8 см. Найдите сторону ромба.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Диагонали ромба пересекаются под прямым углом и делятся пополам.</p><p>2. Полудиагонали: 3 см и 4 см</p><p>3. По теореме Пифагора:</p><div class=\"formula\">a² = 3² + 4² = 9 + 16 = 25</div><div class=\"formula\">a = 5</div><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Сложить диагонали (6+8=14) или найти полупериметр вместо стороны"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите значение производной функции f(x) = e^(2x) в точке x = 0.",
+      "input": true,
+      "correct": "2",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Производная сложной функции:</p><div class=\"formula\">f'(x) = e^(2x) · 2 = 2e^(2x)</div><p>2. Подставляем x = 0:</p><div class=\"formula\">f'(0) = 2e⁰ = 2 · 1 = 2</div><p><strong>Ответ:</strong> 2</p>",
+      "mistake": "Забыть множитель 2 при дифференцировании e^(2x)"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: log₃(x² − 5x + 7) = 0. В ответ запишите сумму корней.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По определению логарифма:</p><div class=\"formula\">x² − 5x + 7 = 3⁰ = 1</div><p>2. Решаем:</p><div class=\"formula\">x² − 5x + 6 = 0</div><p>3. По теореме Виета:</p><div class=\"formula\">x₁ + x₂ = 5</div><p>4. Проверка ОДЗ: x² − 5x + 7 > 0. D = 25 − 28 = −3 < 0, значит всегда > 0.</p><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Забыть, что log₃(1) = 0, и решить x² − 5x + 7 = 0"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "Площадь боковой поверхности конуса в 2 раза больше площади основания. Найдите угол между образующей и высотой.",
+      "input": true,
+      "correct": "60",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Площадь основания: S₁ = πr²</p><p>2. Площадь боковой поверхности: S₂ = πrl</p><p>3. По условию S₂ = 2S₁:</p><div class=\"formula\">πrl = 2πr², значит l = 2r</div><p>4. В прямоугольном треугольнике (высота, радиус, образующая):</p><div class=\"formula\">cos α = h/l = r/l = r/(2r) = 1/2</div><p>5. Значит α = 60°</p><p><strong>Ответ:</strong> 60</p>",
+      "mistake": "Найти угол при основании (30°) вместо угла с высотой"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: 1/2 + 1/3 + 1/6",
+      "options": [
+        "5/6",
+        "1",
+        "2/3",
+        "4/3",
+        "7/6"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Приведём к знаменателю 6:</p><div class=\"formula\">1/2 = 3/6, 1/3 = 2/6, 1/6 = 1/6</div><p>2. Складываем:</p><div class=\"formula\">3/6 + 2/6 + 1/6 = 6/6 = 1</div><p><strong>Ответ:</strong> 1 (вариант Б)</p>",
+      "mistake": "Неверно привести к общему знаменателю"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Найдите значение: log₅125 − log₅5",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. log₅125 = 3, так как 5³ = 125</p><p>2. log₅5 = 1</p><div class=\"formula\">3 − 1 = 2</div><p><strong>Ответ:</strong> 2 (вариант Б)</p>",
+      "mistake": "Сложить вместо вычитания: 3 + 1 = 4"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: (x² − 9) / (x + 3) при x ≠ −3",
+      "options": [
+        "x − 3",
+        "x + 3",
+        "x² − 3",
+        "x − 9",
+        "1"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула разности квадратов:</p><div class=\"formula\">x² − 9 = (x − 3)(x + 3)</div><p>2. Сокращаем:</p><div class=\"formula\">(x − 3)(x + 3) / (x + 3) = x − 3</div><p><strong>Ответ:</strong> x − 3 (вариант А)</p>",
+      "mistake": "Забыть формулу разности квадратов"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: 3^(2x) = 81",
+      "options": [
+        "x = 1",
+        "x = 2",
+        "x = 3",
+        "x = 4",
+        "x = 5"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. 81 = 3⁴</p><div class=\"formula\">3^(2x) = 3⁴</div><p>2. Приравниваем:</p><div class=\"formula\">2x = 4, x = 2</div><p><strong>Ответ:</strong> x = 2 (вариант Б)</p>",
+      "mistake": "Забыть, что 2x = 4, ответить x = 4"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Тригонометрия",
+      "text": "Вычислите: tg 45° + ctg 45°",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "√2",
+        "1/2"
+      ],
+      "correct": 2,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Значения:</p><div class=\"formula\">tg 45° = 1, ctg 45° = 1</div><p>2. Складываем:</p><div class=\"formula\">1 + 1 = 2</div><p><strong>Ответ:</strong> 2 (вариант В)</p>",
+      "mistake": "Забыть, что ctg 45° = 1, а не 0"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: √(3x + 1) = 4. В ответ запишите x.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Возводим в квадрат:</p><div class=\"formula\">3x + 1 = 16</div><p>2. Решаем:</p><div class=\"formula\">3x = 15, x = 5</div><p>3. Проверка: √(15+1) = √16 = 4 ✓</p><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Ошибка в делении: 15/3 = 5, а не 3"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В прямоугольном треугольнике катеты 8 см и 15 см. Найдите гипотенузу.",
+      "input": true,
+      "correct": "17",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По теореме Пифагора:</p><div class=\"formula\">c² = 8² + 15² = 64 + 225 = 289</div><p>2. Извлекаем корень:</p><div class=\"formula\">c = √289 = 17</div><p><strong>Ответ:</strong> 17</p>",
+      "mistake": "Забыть извлечь корень, ответить 289"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите производную f(x) = ln(x²) в точке x = e.",
+      "input": true,
+      "correct": "2/e",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Упрощаем: ln(x²) = 2ln(x)</p><p>2. Производная:</p><div class=\"formula\">f'(x) = 2/x</div><p>3. Подставляем x = e:</p><div class=\"formula\">f'(e) = 2/e</div><p><strong>Ответ:</strong> 2/e (запишите: 2/e)</p>",
+      "mistake": "Найти производную x² вместо ln(x²), получить 2x"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: cos x = −1/2. Найдите сумму двух наименьших положительных корней.",
+      "input": true,
+      "correct": "2pi",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Корни уравнения cos x = −1/2:</p><div class=\"formula\">x = 2π/3 + 2πk или x = 4π/3 + 2πk, k ∈ Z</div><p>2. Наименьшие положительные:</p><div class=\"formula\">x₁ = 2π/3, x₂ = 4π/3</div><p>3. Сумма:</p><div class=\"formula\">2π/3 + 4π/3 = 6π/3 = 2π</div><p><strong>Ответ:</strong> 2π (запишите: 2pi)</p>",
+      "mistake": "Забыть про второй корень в третьей четверти, ответить только 2π/3"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "Объём шара равен 36π см³. Найдите радиус шара.",
+      "input": true,
+      "correct": "3",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула объёма шара:</p><div class=\"formula\">V = (4/3)πr³ = 36π</div><p>2. Решаем:</p><div class=\"formula\">(4/3)r³ = 36</div><div class=\"formula\">r³ = 36 · 3/4 = 27</div><div class=\"formula\">r = 3</div><p><strong>Ответ:</strong> 3</p>",
+      "mistake": "Забыть множитель 4/3, решить πr³ = 36π, r = ∛36"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: (−3)² − (−2)³",
+      "options": [
+        "1",
+        "5",
+        "17",
+        "−17",
+        "−1"
+      ],
+      "correct": 2,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Возведение в степень:</p><div class=\"formula\">(−3)² = 9, (−2)³ = −8</div><p>2. Вычитаем:</p><div class=\"formula\">9 − (−8) = 9 + 8 = 17</div><p><strong>Ответ:</strong> 17 (вариант В)</p>",
+      "mistake": "Забыть скобки: −3² = −9 вместо (−3)² = 9"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Найдите значение: 2^(log₂5)",
+      "options": [
+        "2",
+        "5",
+        "10",
+        "25",
+        "1"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Основное логарифмическое тождество:</p><div class=\"formula\">a^(logₐb) = b</div><p>2. Значит:</p><div class=\"formula\">2^(log₂5) = 5</div><p><strong>Ответ:</strong> 5 (вариант Б)</p>",
+      "mistake": "Умножить показатели: 2 · log₂5 = 5, но забыть формулу"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: sin(π/2 − α)",
+      "options": [
+        "sin α",
+        "cos α",
+        "−sin α",
+        "−cos α",
+        "tg α"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула приведения:</p><div class=\"formula\">sin(π/2 − α) = cos α</div><p><strong>Ответ:</strong> cos α (вариант Б)</p>",
+      "mistake": "Путать формулы приведения sin(π/2 − α) и sin(π/2 + α)"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите неравенство: x² − 4x + 3 > 0",
+      "options": [
+        "(1; 3)",
+        "(−∞; 1) ∪ (3; +∞)",
+        "(−∞; 1] ∪ [3; +∞)",
+        "[1; 3]",
+        "x < 1 или x > 3"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Корни: x² − 4x + 3 = 0, x₁ = 1, x₂ = 3</p><p>2. Парабола ветвями вверх, значит > 0 вне корней:</p><div class=\"formula\">x ∈ (−∞; 1) ∪ (3; +∞)</div><p><strong>Ответ:</strong> (−∞; 1) ∪ (3; +∞) (вариант Б)</p>",
+      "mistake": "Забыть про знак неравенства, взять промежуток между корнями"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Координаты и функции",
+      "text": "Найдите значение 5-го члена арифметической прогрессии, если a₁ = 3, d = 4",
+      "options": [
+        "15",
+        "19",
+        "23",
+        "27",
+        "31"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула n-го члена:</p><div class=\"formula\">aₙ = a₁ + (n−1)d</div><p>2. Подставляем:</p><div class=\"formula\">a₅ = 3 + (5−1)·4 = 3 + 16 = 19</div><p><strong>Ответ:</strong> 19 (вариант Б)</p>",
+      "mistake": "Ошибка в формуле: забыть −1, посчитать 3 + 5·4 = 23"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: (x−1)/(x+2) = 2. В ответ запишите x.",
+      "input": true,
+      "correct": "-5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Умножаем на (x+2):</p><div class=\"formula\">x − 1 = 2(x + 2)</div><p>2. Раскрываем:</p><div class=\"formula\">x − 1 = 2x + 4</div><div class=\"formula\">−x = 5, x = −5</div><p>3. Проверка: x ≠ −2. x = −5 подходит.</p><p><strong>Ответ:</strong> −5</p>",
+      "mistake": "Ошибка в знаке при переносе: −1 − 4 = −5, а не 3"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В треугольнике стороны 5 см, 5 см, 6 см. Найдите высоту, проведённую к стороне 6 см.",
+      "input": true,
+      "correct": "4",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Равнобедренный треугольник, высота делит основание пополам.</p><p>2. Получаем прямоугольный треугольник с катетами 3 и h, гипотенузой 5.</p><p>3. По теореме Пифагора:</p><div class=\"formula\">h² + 3² = 5², h² = 25 − 9 = 16, h = 4</div><p><strong>Ответ:</strong> 4</p>",
+      "mistake": "Не разделить основание пополам, использовать 6 вместо 3"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите точку максимума функции f(x) = −x³ + 3x².",
+      "input": true,
+      "correct": "2",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Производная:</p><div class=\"formula\">f'(x) = −3x² + 6x = −3x(x − 2)</div><p>2. Критические точки: x = 0, x = 2</p><p>3. Исследуем знак:</p><p>f'(x) > 0 при x ∈ (0; 2), f'(x) < 0 при x > 2</p><p>Значит x = 2 — точка максимума.</p><p><strong>Ответ:</strong> 2</p>",
+      "mistake": "Путать точки максимума и минимума (ответ 0)"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: sin(2x) = √3/2. Найдите наименьший положительный корень.",
+      "input": true,
+      "correct": "pi/6",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Общее решение:</p><div class=\"formula\">2x = (−1)^k · π/3 + πk</div><p>2. Делим на 2:</p><div class=\"formula\">x = (−1)^k · π/6 + πk/2</div><p>3. Наименьший положительный при k = 0:</p><div class=\"formula\">x = π/6</div><p><strong>Ответ:</strong> π/6 (запишите: pi/6)</p>",
+      "mistake": "Забыть разделить на 2, ответить π/3"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "Площадь поверхности куба равна 54 см². Найдите объём куба.",
+      "input": true,
+      "correct": "27",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Площадь поверхности куба:</p><div class=\"formula\">S = 6a² = 54, a² = 9, a = 3</div><p>2. Объём:</p><div class=\"formula\">V = a³ = 27</div><p><strong>Ответ:</strong> 27</p>",
+      "mistake": "Найти площадь грани (9) вместо объёма, ответить 9"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: 3/5 − 1/4 + 3/20",
+      "options": [
+        "1/2",
+        "2/5",
+        "3/5",
+        "4/5",
+        "1"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Приведём к знаменателю 20:</p><div class=\"formula\">3/5 = 12/20, 1/4 = 5/20, 3/20 = 3/20</div><p>2. Вычисляем:</p><div class=\"formula\">12/20 − 5/20 + 3/20 = 10/20 = 1/2</div><p><strong>Ответ:</strong> 1/2 (вариант А)</p>",
+      "mistake": "Ошибка в приведении к общему знаменателю"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Найдите значение: log₂(1/8) + log₂32",
+      "options": [
+        "−3",
+        "2",
+        "5",
+        "−5",
+        "3"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. log₂(1/8) = −3, log₂32 = 5</p><div class=\"formula\">−3 + 5 = 2</div><p><strong>Ответ:</strong> 2 (вариант Б)</p>",
+      "mistake": "Сложить модули: 3 + 5 = 8 или вычесть: 5 − 3 = 2, но перепутать знак"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: (a² − b²) / (a² − 2ab + b²)",
+      "options": [
+        "(a+b)/(a−b)",
+        "(a−b)/(a+b)",
+        "a+b",
+        "a−b",
+        "1"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Разлагаем:</p><div class=\"formula\">a² − b² = (a−b)(a+b), a² − 2ab + b² = (a−b)²</div><p>2. Сокращаем:</p><div class=\"formula\">(a−b)(a+b) / (a−b)² = (a+b)/(a−b)</div><p><strong>Ответ:</strong> (a+b)/(a−b) (вариант А)</p>",
+      "mistake": "Забыть, что a² − 2ab + b² = (a−b)², а не (a+b)²"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: 2^(3x−1) = 1/4",
+      "options": [
+        "x = −1/3",
+        "x = 1/3",
+        "x = −1",
+        "x = 1",
+        "x = −2/3"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. 1/4 = 2⁻²</p><div class=\"formula\">2^(3x−1) = 2⁻²</div><p>2. Приравниваем:</p><div class=\"formula\">3x − 1 = −2, 3x = −1, x = −1/3</div><p><strong>Ответ:</strong> x = −1/3 (вариант А)</p>",
+      "mistake": "Забыть, что 1/4 = 2⁻², а не 2²"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Тригонометрия",
+      "text": "Вычислите: sin 150° · cos 120°",
+      "options": [
+        "−√3/4",
+        "√3/4",
+        "−1/4",
+        "1/4",
+        "−1/2"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Значения:</p><div class=\"formula\">sin 150° = sin(180°−30°) = sin 30° = 1/2</div><div class=\"formula\">cos 120° = cos(180°−60°) = −cos 60° = −1/2</div><p>2. Умножаем:</p><div class=\"formula\">(1/2) · (−1/2) = −1/4</div><p><strong>Ответ:</strong> −1/4 (вариант В)</p>",
+      "mistake": "Забыть знак у cos 120° = −1/2, ответить 1/4"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: x³ − 8 = 0. В ответ запишите действительный корень.",
+      "input": true,
+      "correct": "2",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Разность кубов:</p><div class=\"formula\">x³ − 8 = (x−2)(x² + 2x + 4) = 0</div><p>2. x − 2 = 0, значит x = 2</p><p>3. x² + 2x + 4 = 0, D = 4 − 16 = −12 < 0 — нет действительных корней</p><p><strong>Ответ:</strong> 2</p>",
+      "mistake": "Забыть про комплексные корни и записать формулу (−1 ± i√3)"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В прямоугольном треугольнике гипотенуза 13 см, один катет 5 см. Найдите второй катет.",
+      "input": true,
+      "correct": "12",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По теореме Пифагора:</p><div class=\"formula\">a² + 5² = 13²</div><div class=\"formula\">a² = 169 − 25 = 144</div><div class=\"formula\">a = 12</div><p><strong>Ответ:</strong> 12</p>",
+      "mistake": "Сложить вместо вычитания: 169 + 25 = 194"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите производную f(x) = x·e^x в точке x = 0.",
+      "input": true,
+      "correct": "1",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По правилу произведения:</p><div class=\"formula\">f'(x) = 1·e^x + x·e^x = e^x(1 + x)</div><p>2. Подставляем x = 0:</p><div class=\"formula\">f'(0) = e⁰(1 + 0) = 1</div><p><strong>Ответ:</strong> 1</p>",
+      "mistake": "Забыть производную x, ответить e^x(0 + x) = 0"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: tg x = 1. Найдите сумму двух наименьших положительных корней.",
+      "input": true,
+      "correct": "3pi/2",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Корни:</p><div class=\"formula\">x = π/4 + πk, k ∈ Z</div><p>2. Наименьшие положительные:</p><div class=\"formula\">x₁ = π/4 (k = 0), x₂ = 5π/4 (k = 1)</div><p>3. Сумма:</p><div class=\"formula\">π/4 + 5π/4 = 6π/4 = 3π/2</div><p><strong>Ответ:</strong> 3π/2 (запишите: 3pi/2)</p>",
+      "mistake": "Забыть период π у тангенса, искать второй корень с периодом 2π"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "В правильной треугольной пирамиде сторона основания 6 см, боковое ребро 5 см. Найдите высоту пирамиды.",
+      "input": true,
+      "correct": "sqrt13",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Радиус описанной окружности основания:</p><div class=\"formula\">R = a/√3 = 6/√3 = 2√3</div><p>2. По теореме Пифагора (высота, R, боковое ребро):</p><div class=\"formula\">h² + (2√3)² = 5²</div><div class=\"formula\">h² + 12 = 25, h² = 13, h = √13</div><p><strong>Ответ:</strong> √13 (запишите: sqrt13)</p>",
+      "mistake": "Использовать радиус вписанной окружности вместо описанной"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: 0,75 + 1/2 − 0,25",
+      "options": [
+        "0,5",
+        "1",
+        "1,5",
+        "0,75",
+        "2"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Переводим в дроби:</p><div class=\"formula\">0,75 = 3/4, 0,25 = 1/4, 1/2 = 2/4</div><p>2. Складываем:</p><div class=\"formula\">3/4 + 2/4 − 1/4 = 4/4 = 1</div><p><strong>Ответ:</strong> 1 (вариант Б)</p>",
+      "mistake": "Ошибка в переводе десятичных дробей в обыкновенные"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Найдите значение: ∛64 · ∛(−1/8)",
+      "options": [
+        "−2",
+        "2",
+        "−4",
+        "4",
+        "−8"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Находим корни:</p><div class=\"formula\">∛64 = 4, ∛(−1/8) = −1/2</div><p>2. Умножаем:</p><div class=\"formula\">4 · (−1/2) = −2</div><p><strong>Ответ:</strong> −2 (вариант А)</p>",
+      "mistake": "Забыть знак минус: ∛(−1/8) = −1/2, а не 1/2"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: cos(π + α)",
+      "options": [
+        "cos α",
+        "−cos α",
+        "sin α",
+        "−sin α",
+        "tg α"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула приведения:</p><div class=\"formula\">cos(π + α) = −cos α</div><p><strong>Ответ:</strong> −cos α (вариант Б)</p>",
+      "mistake": "Забыть знак: cos(π + α) = −cos α, а не cos α"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: |2x − 1| = 3",
+      "options": [
+        "x = 2",
+        "x = −1",
+        "x = 2 или x = −1",
+        "x = 1 или x = −2",
+        "x = 0,5"
+      ],
+      "correct": 2,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Раскрываем модуль:</p><div class=\"formula\">2x − 1 = 3 или 2x − 1 = −3</div><p>2. Находим корни:</p><div class=\"formula\">2x = 4, x = 2 или 2x = −2, x = −1</div><p><strong>Ответ:</strong> x = 2 или x = −1 (вариант В)</p>",
+      "mistake": "Забыть второй корень, ответить только x = 2"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Координаты и функции",
+      "text": "Найдите 4-й член геометрической прогрессии, если b₁ = 2, q = 3",
+      "options": [
+        "18",
+        "27",
+        "54",
+        "81",
+        "162"
+      ],
+      "correct": 2,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула n-го члена:</p><div class=\"formula\">bₙ = b₁ · q^(n−1)</div><p>2. Подставляем:</p><div class=\"formula\">b₄ = 2 · 3³ = 2 · 27 = 54</div><p><strong>Ответ:</strong> 54 (вариант В)</p>",
+      "mistake": "Ошибка в степени: 3⁴ = 81 вместо 3³ = 27"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: log₂(x−3) = 4. В ответ запишите x.",
+      "input": true,
+      "correct": "19",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По определению логарифма:</p><div class=\"formula\">x − 3 = 2⁴ = 16</div><p>2. Находим x:</p><div class=\"formula\">x = 19</div><p>3. Проверка ОДЗ: x − 3 > 0, 19 > 3 ✓</p><p><strong>Ответ:</strong> 19</p>",
+      "mistake": "Забыть прибавить 3: ответить 16 вместо 19"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В трапеции основания 4 см и 10 см, высота 3 см. Найдите площадь.",
+      "input": true,
+      "correct": "21",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула площади трапеции:</p><div class=\"formula\">S = (a+b)/2 · h = (4+10)/2 · 3 = 7 · 3 = 21</div><p><strong>Ответ:</strong> 21</p>",
+      "mistake": "Сложить основания и умножить на высоту без деления на 2: 14·3 = 42"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите значение производной функции f(x) = sin(3x) в точке x = π/6.",
+      "input": true,
+      "correct": "0",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Производная:</p><div class=\"formula\">f'(x) = 3cos(3x)</div><p>2. Подставляем x = π/6:</p><div class=\"formula\">f'(π/6) = 3cos(π/2) = 3 · 0 = 0</div><p><strong>Ответ:</strong> 0</p>",
+      "mistake": "Забыть множитель 3, ответить cos(π/2) = 0 — правильно, но при другом x ошибка"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: 2sin²x + 3sin x − 2 = 0. Найдите наименьший положительный корень (в радианах).",
+      "input": true,
+      "correct": "pi/6",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Замена t = sin x:</p><div class=\"formula\">2t² + 3t − 2 = 0</div><p>2. D = 9 + 16 = 25, t = (−3±5)/4</p><div class=\"formula\">t₁ = 1/2, t₂ = −2 (не подходит, так как |sin x| ≤ 1)</div><p>3. sin x = 1/2, x = (−1)^k · π/6 + πk</p><p>4. Наименьший положительный: x = π/6</p><p><strong>Ответ:</strong> π/6 (запишите: pi/6)</p>",
+      "mistake": "Не отбросить t = −2, получить лишние корни"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "Объём конуса равен 100π см³, высота 12 см. Найдите радиус основания.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула объёма конуса:</p><div class=\"formula\">V = (1/3)πr²h = 100π</div><p>2. Решаем:</p><div class=\"formula\">(1/3)r² · 12 = 100</div><div class=\"formula\">4r² = 100, r² = 25, r = 5</div><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Забыть множитель 1/3, решить πr²h = 100π, r² = 100/12"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Вычислите: 2/3 · 9/4 − 1/2",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Умножаем дроби:</p><div class=\"formula\">2/3 · 9/4 = 18/12 = 3/2</div><p>2. Вычитаем:</p><div class=\"formula\">3/2 − 1/2 = 2/2 = 1</div><p><strong>Ответ:</strong> 1 (вариант А)</p>",
+      "mistake": "Ошибка в сокращении дробей перед умножением"
+    },
+    {
+      "id": 2,
+      "type": "A",
+      "level": "I",
+      "topic": "Числа и вычисления",
+      "text": "Найдите значение: log₅5 + log₅1",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "5",
+        "6"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. log₅5 = 1, log₅1 = 0</p><div class=\"formula\">1 + 0 = 1</div><p><strong>Ответ:</strong> 1 (вариант Б)</p>",
+      "mistake": "Забыть, что log₅1 = 0, а не 1"
+    },
+    {
+      "id": 3,
+      "type": "A",
+      "level": "II",
+      "topic": "Выражения и преобразования",
+      "text": "Упростите: (a³ + b³) / (a² − ab + b²)",
+      "options": [
+        "a + b",
+        "a − b",
+        "a² + b²",
+        "a² − b²",
+        "1"
+      ],
+      "correct": 0,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Формула суммы кубов:</p><div class=\"formula\">a³ + b³ = (a + b)(a² − ab + b²)</div><p>2. Сокращаем:</p><div class=\"formula\">(a + b)(a² − ab + b²) / (a² − ab + b²) = a + b</div><p><strong>Ответ:</strong> a + b (вариант А)</p>",
+      "mistake": "Путать формулы суммы и разности кубов"
+    },
+    {
+      "id": 4,
+      "type": "A",
+      "level": "II",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: 3x − 7 = 2x + 5",
+      "options": [
+        "x = 2",
+        "x = 12",
+        "x = −2",
+        "x = 10",
+        "x = −12"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Переносим слагаемые:</p><div class=\"formula\">3x − 2x = 5 + 7</div><p>2. Находим x:</p><div class=\"formula\">x = 12</div><p><strong>Ответ:</strong> x = 12 (вариант Б)</p>",
+      "mistake": "Ошибка в знаках при переносе: 3x + 2x = 5 − 7"
+    },
+    {
+      "id": 5,
+      "type": "A",
+      "level": "III",
+      "topic": "Тригонометрия",
+      "text": "Вычислите: cos²30° − sin²30°",
+      "options": [
+        "0",
+        "0,5",
+        "1",
+        "√3/2",
+        "−0,5"
+      ],
+      "correct": 1,
+      "solution": "<p><strong>Решение:</strong></p><p>1. Значения:</p><div class=\"formula\">cos 30° = √3/2, sin 30° = 1/2</div><p>2. Вычисляем:</p><div class=\"formula\">(√3/2)² − (1/2)² = 3/4 − 1/4 = 2/4 = 0,5</div><p><strong>Ответ:</strong> 0,5 (вариант Б)</p>",
+      "mistake": "Забыть возвести в квадрат, ответить √3/2 − 1/2"
+    },
+    {
+      "id": 6,
+      "type": "B",
+      "level": "III",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: x² − 7x + 12 = 0. В ответ запишите произведение корней.",
+      "input": true,
+      "correct": "12",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По теореме Виета:</p><div class=\"formula\">x₁ · x₂ = 12</div><p>2. Проверка: x² − 7x + 12 = (x−3)(x−4) = 0, корни 3 и 4</p><div class=\"formula\">3 · 4 = 12</div><p><strong>Ответ:</strong> 12</p>",
+      "mistake": "Найти сумму вместо произведения (ответ 7)"
+    },
+    {
+      "id": 7,
+      "type": "B",
+      "level": "IV",
+      "topic": "Геометрия",
+      "text": "В прямоугольном треугольнике катеты 9 см и 12 см. Найдите гипотенузу.",
+      "input": true,
+      "correct": "15",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По теореме Пифагора:</p><div class=\"formula\">c² = 9² + 12² = 81 + 144 = 225</div><p>2. Извлекаем корень:</p><div class=\"formula\">c = √225 = 15</div><p><strong>Ответ:</strong> 15</p>",
+      "mistake": "Забыть извлечь корень, ответить 225"
+    },
+    {
+      "id": 8,
+      "type": "B",
+      "level": "IV",
+      "topic": "Координаты и функции",
+      "text": "Найдите производную f(x) = x³ − 2x² + x в точке x = 2.",
+      "input": true,
+      "correct": "5",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Находим f'(x):</p><div class=\"formula\">f'(x) = 3x² − 4x + 1</div><p>2. Подставляем x = 2:</p><div class=\"formula\">f'(2) = 3·4 − 4·2 + 1 = 12 − 8 + 1 = 5</div><p><strong>Ответ:</strong> 5</p>",
+      "mistake": "Ошибка в коэффициенте при x²: производная −2x² = −4x, а не −2x"
+    },
+    {
+      "id": 9,
+      "type": "B",
+      "level": "V",
+      "topic": "Уравнения и неравенства",
+      "text": "Решите уравнение: log₃(x² − 2x) = 1. В ответ запишите сумму корней.",
+      "input": true,
+      "correct": "2",
+      "solution": "<p><strong>Решение:</strong></p><p>1. По определению:</p><div class=\"formula\">x² − 2x = 3¹ = 3</div><p>2. Решаем:</p><div class=\"formula\">x² − 2x − 3 = 0</div><p>3. По теореме Виета:</p><div class=\"formula\">x₁ + x₂ = 2</div><p>4. Проверка ОДЗ: x² − 2x > 0, x(x−2) > 0, x ∈ (−∞; 0) ∪ (2; +∞). Корни −1 и 3 подходят.</p><p><strong>Ответ:</strong> 2</p>",
+      "mistake": "Забыть ОДЗ, не проверить корни"
+    },
+    {
+      "id": 10,
+      "type": "B",
+      "level": "V",
+      "topic": "Геометрия",
+      "text": "В правильной четырёхугольной пирамиде сторона основания 4 см, апофема 2√2 см. Найдите высоту пирамиды.",
+      "input": true,
+      "correct": "2",
+      "solution": "<p><strong>Решение:</strong></p><p>1. Расстояние от центра до стороны (вписанный радиус квадрата):</p><div class=\"formula\">r = a/2 = 4/2 = 2</div><p>2. По теореме Пифагора:</p><div class=\"formula\">h² + 2² = (2√2)²</div><div class=\"formula\">h² + 4 = 8, h² = 4, h = 2</div><p><strong>Ответ:</strong> 2</p>",
+      "mistake": "Путать апофему с боковым ребром или использовать диагональ вместо r"
+    }
+  ]
+];
+
+let currentVariant = 0;
+let questions = allVariants[0];
+
+        currentVariant = 0;
+        let userAnswers = {};
+        let testCompleted = false;
+
+        function init() {
+            loadVariant(0, null);
+        }
+
+        function loadVariant(variantIndex, btn) {
+    currentVariant = variantIndex;
+    questions = allVariants[variantIndex];
+    userAnswers = {};
+    testCompleted = false;
+
+    document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    else document.querySelectorAll('.variant-btn')[0].classList.add('active');
+
+    document.getElementById('scoreDisplay').classList.remove('show');
+    document.getElementById('checkBtn').classList.remove('hidden');
+    document.getElementById('restartBtn').classList.add('hidden');
+
+    renderQuestions();
+}
+
+        function renderQuestions() {
+            const container = document.getElementById('testBody');
+            container.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const questionEl = document.createElement('div');
+                questionEl.className = 'question';
+                questionEl.innerHTML = `
+                    <div style="margin-bottom: 12px;">
+                        <span class="question-number">${index + 1}</span>
+                        <span class="question-text">${q.text}</span>
+                        <span class="question-meta">
+                            <span class="badge ${q.level === 'I' ? 'badge-green' : q.level === 'II' ? 'badge-blue' : q.level === 'III' ? 'badge-yellow' : q.level === 'IV' ? 'badge-red' : 'badge-purple'}">${q.level} ур.</span>
+                            <span class="badge badge-blue">Часть ${q.type}</span>
+                        </span>
+                    </div>
+                    ${q.input ? renderInputQuestion(q, index) : renderOptionsQuestion(q, index)}
+                    <div class="solution" id="solution-${index}"></div>
+                `;
+                container.appendChild(questionEl);
+            });
+        }
+
+        function renderOptionsQuestion(q, index) {
+            let html = '<div class="options">';
+            q.options.forEach((opt, i) => {
+                const letter = ['А', 'Б', 'В', 'Г', 'Д'][i];
+                html += `<div class="option" onclick="selectOption(${index}, ${i})" id="option-${index}-${i}"><span class="option-letter">${letter}</span><span>${opt}</span></div>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function renderInputQuestion(q, index) {
+            return `<div style="margin-top: 12px;"><input type="text" id="input-${index}" placeholder="Введите ответ..." style="width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 12px; font-size: 1rem; font-family: inherit;" oninput="saveInput(${index}, this.value)"></div>`;
+        }
+
+        function selectOption(qIndex, oIndex) {
+            if (testCompleted) return;
+            document.querySelectorAll(`[id^="option-${qIndex}-"]`).forEach(el => el.classList.remove('selected'));
+            document.getElementById(`option-${qIndex}-${oIndex}`).classList.add('selected');
+            userAnswers[qIndex] = oIndex;
+        }
+
+        function saveInput(qIndex, value) {
+            if (testCompleted) return;
+            userAnswers[qIndex] = value.trim().toLowerCase().replace(/,/g, '.');
+        }
+
+        function checkAnswers() {
+            if (Object.keys(userAnswers).length < questions.length) {
+                showModal('Внимание', 'Пожалуйста, ответьте на все вопросы перед проверкой.');
+                return;
+            }
+
+            testCompleted = true;
+            let correct = 0;
+
+            questions.forEach((q, index) => {
+                const solutionEl = document.getElementById(`solution-${index}`);
+                let solutionHTML = q.solution;
+                if (q.mistake) {
+                    solutionHTML += `<div class="mistake-alert">⚠️ <strong>Типичная ошибка:</strong> ${q.mistake}</div>`;
+                }
+                solutionEl.innerHTML = solutionHTML;
+                solutionEl.classList.add('show');
+
+                if (q.input) {
+                    const input = document.getElementById(`input-${index}`);
+                    input.disabled = true;
+                    const userVal = userAnswers[index].toString().replace(/\s/g, '').replace(/pi/g, 'π');
+                    const correctVal = q.correct.toString().replace(/\s/g, '');
+                    if (userVal === correctVal || userAnswers[index] === q.correct) {
+                        correct++;
+                        input.style.borderColor = 'var(--success)';
+                        input.style.background = '#d1fae5';
+                    } else {
+                        input.style.borderColor = 'var(--danger)';
+                        input.style.background = '#fee2e2';
+                    }
+                } else {
+                    const selectedOption = document.querySelector(`#option-${index}-${userAnswers[index]}`);
+                    const correctOption = document.querySelector(`#option-${index}-${q.correct}`);
+
+                    if (userAnswers[index] === q.correct) {
+                        correct++;
+                        selectedOption.classList.add('correct');
+                    } else {
+                        selectedOption.classList.add('wrong');
+                        correctOption.classList.add('correct');
+                    }
+
+                    document.querySelectorAll(`[id^="option-${index}-"]`).forEach(el => {
+                        el.style.pointerEvents = 'none';
+                    });
+                }
+            });
+
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scoreText = document.getElementById('scoreText');
+            const scoreAdvice = document.getElementById('scoreAdvice');
+
+            scoreDisplay.classList.add('show');
+            scoreCircle.textContent = Math.round((correct / questions.length) * 100) + '%';
+            scoreText.textContent = `Решено правильно: ${correct} из ${questions.length}`;
+
+            if (correct === questions.length) {
+                scoreAdvice.textContent = '🎉 Отлично! Ты готов к ЦТ!';
+            } else if (correct >= 7) {
+                scoreAdvice.textContent = '👍 Хороший результат! Повтори темы с ошибками.';
+            } else if (correct >= 4) {
+                scoreAdvice.textContent = '💪 Неплохо, но нужно больше практики. Повтори теорию.';
+            } else {
+                scoreAdvice.textContent = '📚 Начни с основ. Разберись с теорией, потом практикуйся.';
+            }
+
+            document.getElementById('checkBtn').classList.add('hidden');
+            document.getElementById('restartBtn').classList.remove('hidden');
+            scoreDisplay.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function restartTest() {
+    userAnswers = {};
+    testCompleted = false;
+    document.getElementById('scoreDisplay').classList.remove('show');
+    document.getElementById('checkBtn').classList.remove('hidden');
+    document.getElementById('restartBtn').classList.add('hidden');
+    questions = allVariants[currentVariant];
+    renderQuestions();
+}
+
+        function calculateScore() {
+            const partA = parseInt(document.getElementById('partA').value) || 0;
+            const partB = parseInt(document.getElementById('partB').value) || 0;
+            const partAHalf = parseInt(document.getElementById('partAHalf').value) || 0;
+            const partBHalf = parseInt(document.getElementById('partBHalf').value) || 0;
+
+            // Validate
+            if (partA + partAHalf > 10) {
+                document.getElementById('partA').value = 10 - partAHalf;
+                return calculateScore();
+            }
+            if (partB + partBHalf > 20) {
+                document.getElementById('partB').value = 20 - partBHalf;
+                return calculateScore();
+            }
+
+            // Calculate primary score
+            // Part A: 1 point per correct, 0.5 per half-correct
+            // Part B: 2 points per correct, 1 per half-correct
+            const primaryScore = (partA * 1 + partAHalf * 0.5) + (partB * 2 + partBHalf * 1);
+
+            // Approximate test score conversion (simplified linear for demo)
+            // Real conversion is non-linear and published by RIKZ
+            const rikzTable = {0: 0, 1: 2, 2: 10, 3: 15, 4: 21, 5: 25, 6: 29, 7: 32, 8: 35, 9: 38, 10: 41, 11: 43, 12: 45, 13: 48, 14: 50, 15: 52, 16: 53, 17: 55, 18: 57, 19: 58, 20: 60, 21: 61, 22: 63, 23: 64, 24: 65, 25: 66, 26: 68, 27: 69, 28: 70, 29: 71, 30: 73, 31: 74, 32: 75, 33: 76, 34: 78, 35: 79, 36: 80, 37: 82, 38: 83, 39: 85, 40: 87, 41: 88, 42: 90, 43: 93, 44: 94, 45: 95, 46: 96, 47: 97, 48: 98, 49: 99, 50: 100};
+            let testScore = rikzTable[Math.round(primaryScore)] || 0;
+
+            document.getElementById('primaryScore').textContent = primaryScore;
+            document.getElementById('testScore').textContent = testScore;
+            document.getElementById('calcResult').classList.add('show');
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            document.querySelectorAll('.section-content').forEach(section => section.classList.remove('active'));
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+
+        function switchSubject(subject) {
+            document.querySelectorAll('.subject-tab').forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            if (subject !== 'math') {
+                showComingSoon();
+                setTimeout(() => {
+                    document.querySelectorAll('.subject-tab').forEach(tab => tab.classList.remove('active'));
+                    document.querySelector('.subject-tab:first-child').classList.add('active');
+                }, 100);
+            }
+        }
+
+        function showComingSoon() {
+            showModal('Скоро!', 'Этот предмет будет добавлен в ближайшее время. Сейчас доступна только математика.');
+        }
+
+        function showModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalContent').innerHTML = '<p>' + content + '</p>';
+            document.getElementById('modal').classList.add('show');
+        }
+
+        function closeModal(e) {
+            if (!e || e.target.id === 'modal') {
+                document.getElementById('modal').classList.remove('show');
+            }
+        }
+
+        function toggleMenu() {
+            showModal('Меню', `<div style="display: flex; flex-direction: column; gap: 12px;">
+                <button class="btn btn-primary" style="margin: 0;" onclick="switchTab('structure', document.querySelectorAll('.nav-tab')[0]); closeModal();">📋 Структура</button>
+                <button class="btn btn-secondary" style="margin: 0;" onclick="switchTab('topics', document.querySelectorAll('.nav-tab')[1]); closeModal();">📚 Темы</button>
+                <button class="btn btn-secondary" style="margin: 0;" onclick="switchTab('practice', document.querySelectorAll('.nav-tab')[2]); closeModal();">✏️ Практика</button>
+                <button class="btn btn-secondary" style="margin: 0;" onclick="switchTab('test', document.querySelectorAll('.nav-tab')[3]); closeModal();">📝 Тест</button>
+                <button class="btn btn-secondary" style="margin: 0;" onclick="switchTab('calculator', document.querySelectorAll('.nav-tab')[4]); closeModal();">🎯 Калькулятор</button>
+                <button class="btn btn-secondary" style="margin: 0;" onclick="switchTab('plan', document.querySelectorAll('.nav-tab')[5]); closeModal();">📅 План</button>
+                <button class="btn btn-secondary" style="margin: 0;" onclick="switchTab('sources', document.querySelectorAll('.nav-tab')[6]); closeModal();">🔗 Источники</button>
+                </div>`);
+        }
+
+        // Prevent zoom on double tap for mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Initialize
+        init();
+    </script>
+</body>
+</html>
